@@ -1,0 +1,16 @@
+<table class="table table-condensed">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>用户ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(var i in users){ %>
+    <tr>
+        <td><%= offset + parseInt(i) + 1 %></td>
+        <td><a target="_blank" href="/tools/recommend/u?uid=<%= users[i].uid %>"> <%= users[i].uid %></a></td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>

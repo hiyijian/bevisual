@@ -1,0 +1,38 @@
+{
+  "development": {
+    "username": "root",
+    "password": "root",
+    "database": "viplog",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "define": {
+        "timestamps": false
+    },
+    "impala" : "http://192.168.51.160:9100/VipCloud/Service/BehaviorAlanalysis?wsdl",
+    "di" : "http://192.168.51.125:8080/vipCloud/service/WsdlSearchable?wsdl"
+  },
+  "test": {
+    "username": "root",
+    "password": "root",
+    "database": "viplog",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "define": {
+        "timestamps": false
+    },
+    "impala" : "http://192.168.51.160:9100/VipCloud/Service/BehaviorAlanalysis?wsdl",
+    "di" : "http://192.168.51.125:8080/vipCloud/service/WsdlSearchable?wsdl"
+  },
+  "production": {
+    "username": "root",
+    "password": "root",
+    "database": "viplog",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "define": {
+        "timestamps": false
+    },
+    "impala" : "http://192.168.51.160:9100/VipCloud/Service/BehaviorAlanalysis?wsdl",
+    "di" : "http://192.168.51.125:8080/vipCloud/service/WsdlSearchable?wsdl"
+  }
+}

@@ -1,0 +1,22 @@
+<% layout('../base.ejs') -%>
+<% script('/javascripts/jquery.bootpag.js') -%>
+<% script('/javascripts/recommend.js') -%>
+
+<header class="jumbotron subhead masthead">
+    <div class="container">
+        <h1>日志平台</h1>
+        <p class="lead">个性化推荐-抽样评估</p>
+    </div>
+</header>
+<div class="container">
+    <div class="container">
+	<div class="col-md-9">
+		<div id='sample' class=callout>
+			<h3>随机抽样<%= n %>个匿名用户</h3>
+			<div id=sample_box>
+			<% include ./user_table.ejs %>
+			</div>
+		</div>
+	</div>
+    </div>
+</div>

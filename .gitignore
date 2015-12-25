@@ -1,0 +1,4 @@
+*.pyc
+*.jar
+web/node_modules
+web/bin

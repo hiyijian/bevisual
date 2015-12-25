@@ -1,0 +1,43 @@
+<% layout('../base.ejs') -%>
+<% script('/javascripts/jquery.bootpag.js') -%>
+<% script('/javascripts/recommend.js') -%>
+
+<header class="jumbotron subhead masthead">
+    <div class="container">
+        <h1>日志平台</h1>
+        <p class="lead">个性化推荐-所有用户</p>
+    </div>
+</header>
+<div class="container">
+    <div class="container">
+        <form class="form-inline col-md-3" role="form" action="/tools/recommend/u" method="get" target="_blank">
+            <div class="input-group">
+                <input type="text" name="uid" class="form-control" placeholder="查看特定用户，输入用户ID">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                  </span>
+            </div>
+        </form>
+        <form class="form-inline col-md-3" role="form" action="/tools/recommend/sample" method="get" target="_blank">
+            <div class="input-group">
+                <input type="text" name="n" class="form-control" placeholder="抽样评估，输入抽样用户数">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                    </button>
+                  </span>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+	<div class="col-md-9">
+		<div id='users' class=callout>
+			<h3>共为<%= ucount %>个匿名用户提供推荐</h3>
+			<div id=user_box></div>
+			<div id='user_pager'></div>
+		</div>
+	</div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<table class="table table-condensed">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>文章</th>
+        <th>分数</th>
+        <th>分析</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(var i in rlist){ %>
+    <tr>
+        <td><%= offset + parseInt(i) + 1 %></td>
+        <td><a target="_blank" href="http://zlf.cqvip.com/article/detail.aspx?id=<%= rlist[i].id %>"><%= rlist[i].title %></a></td>
+        <td><%= rlist[i].s %></td>
+        <td><a target="_blank" href="/tools/compare/index?uid=<%= uid %>&docid=<%= rlist[i].id %>&s=<%= rlist[i].s %>">Go</a></td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>

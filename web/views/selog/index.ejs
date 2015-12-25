@@ -1,0 +1,238 @@
+<% layout('../base.ejs') -%>
+<% script('/javascripts/selog.js') -%>
+<% script('/javascripts/echarts-all.js') -%>
+<% script('/javascripts/infographic.js') -%>
+<% script('/javascripts/jquery.bootpag.js') -%>
+
+<header class="jumbotron subhead masthead">
+    <div class="container">
+        <h1>日志平台</h1>
+        <p class="lead">检索-点击</p>
+    </div>
+</header>
+<div class="container">
+    <ul id="se-tabs" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#lastest" id="lastest-tab" role="tab" data-toggle="tab" aria-controls="lastest" aria-expanded="true">最新汇总</a></li>
+        <li role="presentation" class=""><a href="#history" role="tab" id="history-tab" data-toggle="tab" aria-controls="history" aria-expanded="false">历史趋势</a></li>
+    </ul>
+    <div id="se-content" class="tab-content">
+        </p>
+        <center id="loading" style="display: none;"><img src="/images/loading.gif"></center>
+        <!-- 最近汇总 -->
+        <div role="tabpanel" class="tab-pane fade active in" id="lastest" aria-labelledby="lastest-tab">
+            <% if(recentq == null){ %>
+            <p></p>
+            <center>对不起，最新汇总还未生成，请稍后重试</center>
+            <% }else{ %>
+            <div class="row">
+                <div class="col-md-9">
+                    <h3><%= recentq.time %></h3>
+                    <div id="search_quality" class="callout">
+                        <h3>检索质量</h3>
+                        <table class="table table-condensed">
+                            <thead>
+                            <tr>
+                                <th>检索总次数</th>
+                                <th>点击率</th>
+                                <th>平均点击次数</th>
+                                <th>平均首次点击位置</th>
+                                <th>平均首次点击时间</th>
+                                <th>无结果率</th>
+                                <th>翻页率</th>
+                                <th>平均翻页次数</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <%= recentq.search %>
+                                    <% if(rate.search){ %>
+                                        <% if(rate.search > 0){ %>
+                                            <a title="<%= rate.search.toFixed(2) %>%">
+                                                <span class="red glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                            </a>
+                                        <% } else if(rate.search < 0) {%>
+                                            <a title="<%= rate.search.toFixed(2) %>%">
+                                                <span class="green glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                            </a>
+                                        <% }else {%>
+                                            <span class="yellow glyphicon glyphicon-arrow-minus" aria-hidden="true"></span>
+                                        <% }%>
+                                    <% }%>
+                                </td>
+                                <td>
+                                    <%=  recentq.ctr.toFixed(2) %>%
+                                    <% if(rate.ctr){ %>
+                                        <% if(rate.ctr > 0){ %>
+                                        <a title="<%= rate.ctr.toFixed(2) %>%">
+                                            <span class="red glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                        </a>
+                                        <% } else if(rate.ctr < 0) {%>
+                                        <a title="<%= rate.ctr.toFixed(2) %>%">
+                                            <span class="green glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                        </a>
+                                        <% }else {%>
+                                        <span class="yellow glyphicon glyphicon-arrow-minus" aria-hidden="true"></span>
+                                        <% }%>
+                                    <% }%>
+                                </td>
+                                <td>
+                                    <%= recentq.click.toFixed(2) %>
+                                    <% if(rate.click){ %>
+                                        <% if(rate.click > 0){ %>
+                                        <a title="<%= rate.click.toFixed(2) %>%">
+                                            <span class="red glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                        </a>
+                                        <% } else if(rate.click < 0) {%>
+                                        <a title="<%= rate.click.toFixed(2) %>%">
+                                            <span class="green glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                        </a>
+                                        <% }else {%>
+                                        <span class="yellow glyphicon glyphicon-arrow-minus" aria-hidden="true"></span>
+                                        <% }%>
+                                    <% }%>
+                                </td>
+                                <td>
+                                    <%= recentq.ctp.toFixed(2) %>
+                                    <% if(rate.ctp){ %>
+                                        <% if(rate.ctp > 0){ %>
+                                        <a title="<%= rate.ctp.toFixed(2) %>%">
+                                            <span class="red glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                        </a>
+                                        <% } else if(rate.ctp < 0) {%>
+                                        <a title="<%= rate.ctp.toFixed(2) %>%">
+                                            <span class="green glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                        </a>
+                                        <% }else {%>
+                                        <span class="yellow glyphicon glyphicon-arrow-minus" aria-hidden="true"></span>
+                                        <% }%>
+                                    <% }%>
+                                </td>
+                                <td>
+                                    <%= recentq.ctt.toFixed(2) %>s
+                                    <% if(rate.ctt){ %>
+                                        <% if(rate.ctt > 0){ %>
+                                        <a title="<%= rate.ctt.toFixed(2) %>%">
+                                            <span class="red glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                        </a>
+                                        <% } else if(rate.ctt < 0) {%>
+                                        <a title="<%= rate.ctt.toFixed(2) %>%">
+                                            <span class="green glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                        </a>
+                                        <% }else {%>
+                                        <span class="yellow glyphicon glyphicon-arrow-minus" aria-hidden="true"></span>
+                                        <% }%>
+                                    <% }%>
+                                </td>
+                                <td>
+                                    <%= recentq.nullr.toFixed(2) %>%
+                                    <% if(rate.nullr){ %>
+                                        <% if(rate.nullr > 0){ %>
+                                        <a title="<%= rate.nullr.toFixed(2) %>%">
+                                            <span class="red glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                        </a>
+                                        <% } else if(rate.nullr < 0) {%>
+                                        <a title="<%= rate.nullr.toFixed(2) %>%">
+                                            <span class="green glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                        </a>
+                                        <% }else {%>
+                                        <span class="yellow glyphicon glyphicon-arrow-minus" aria-hidden="true"></span>
+                                        <% }%>
+                                    <% }%>
+                                </td>
+                                <td>
+                                    <%= recentq.pager.toFixed(2) %>%
+                                    <% if(rate.pager){ %>
+                                        <% if(rate.pager > 0){ %>
+                                        <a title="<%= rate.pager.toFixed(2) %>%">
+                                            <span class="red glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                        </a>
+                                        <% } else if(rate.pager < 0) {%>
+                                        <a title="<%= rate.pager.toFixed(2) %>%">
+                                            <span class="green glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                        </a>
+                                        <% }else {%>
+                                        <span class="yellow glyphicon glyphicon-arrow-minus" aria-hidden="true"></span>
+                                        <% }%>
+                                    <% }%>
+                                </td>
+                                <td>
+                                    <%= recentq.page.toFixed(2) %>
+                                    <% if(rate.page){ %>
+                                        <% if(rate.page > 0){ %>
+                                        <a title="<%= rate.page.toFixed(2) %>%">
+                                            <span class="red glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                        </a>
+                                        <% } else if(rate.page < 0) {%>
+                                        <a title="<%= rate.page.toFixed(2) %>%">
+                                            <span class="green glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                        </a>
+                                        <% }else {%>
+                                        <span class="yellow glyphicon glyphicon-arrow-minus" aria-hidden="true"></span>
+                                        <% }%>
+                                    <% }%>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="hotq" class="callout">
+                        <h3 >热词榜</h3>
+                        <div id="hotq_box"></div>
+                        <div id="hotq_pager"></div>
+                    </div>
+                </div>
+                <div class="col-md-3" id="scrollspy">
+                    <ul class="nav nav-list affix">
+                        <li class="active"><a href="#search_quality">检索质量</a></li>
+                        <li><a href="#hotq">热词榜</a></li>
+                    </ul>
+                </div>
+            </div>
+            <% } %>
+        </div>
+        <!-- 历史趋势 -->
+        <div role="tabpanel" class="tab-pane fade" id="history" aria-labelledby="history-tab">
+            <div class="row">
+                <div class="col-md-9">
+                    <div id="search" class="callout">
+                        <div class="echart-canvas" id="search-plot"></div>
+                    </div>
+                    <div id="ctr" class="callout">
+                        <div class="echart-canvas" id="ctr-plot"></div>
+                    </div>
+                    <div id="click" class="callout">
+                        <div class="echart-canvas" id="click-plot"></div>
+                    </div>
+                    <div id="ctp" class="callout">
+                        <div class="echart-canvas" id="ctp-plot"></div>
+                    </div>
+                    <div id="ctt" class="callout">
+                        <div class="echart-canvas" id="ctt-plot"></div>
+                    </div>
+                    <div id="nullr" class="callout">
+                        <div class="echart-canvas" id="nullr-plot"></div>
+                    </div>
+                    <div id="pager" class="callout">
+                        <div class="echart-canvas" id="pager-plot"></div>
+                    </div>
+                    <div id="page" class="callout">
+                        <div class="echart-canvas" id="page-plot"></div>
+                    </div>
+                </div>
+                <div class="col-md-3" id="scrollspy">
+                    <ul class="nav nav-list affix">
+                        <li class="active"><a href="#search">检索总次数</a></li>
+                        <li><a href="#ctr">点击率</a></li>
+                        <li><a href="#click">平均点击次数</a></li>
+                        <li><a href="#ctp">平均首次点击位置</a></li>
+                        <li><a href="#ctt">平均首次点击时间</a></li>
+                        <li><a href="#nullr">无结果率</a></li>
+                        <li><a href="#pager">翻页率</a></li>
+                        <li><a href="#page">平均翻页次数</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

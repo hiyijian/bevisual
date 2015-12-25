@@ -1,0 +1,111 @@
+<% layout('../base.ejs') -%>
+<% script('/javascripts/bootstrap-datepicker.js') -%>
+<% script('/javascripts/session.js') -%>
+<% stylesheet('/stylesheets/datepicker3.css') -%>
+
+<header class="jumbotron subhead masthead">
+    <div class="container">
+        <h1>日志平台</h1>
+        <p class="lead">Session回放</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="container">
+        <form class="form-inline" role="form" action="/tools/session" method="get">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="关键词">
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                  </span>
+            </div>
+            @
+            <div class="input-group">
+                <input type="text" name="t" class="form-control">
+            </div>
+            <input type="text" name="p" value="0" class="hidden">
+        </form>
+    </div>
+
+    <% if(typeof(result) != 'undefined' || typeof(err) != 'undefined'){ %>
+        <h3>回放"<%= request.query.q %>"@<%= request.query.t %></h3>
+        <div class="callout container">
+            <% if(typeof(err) != "undefined" && err < 0){ %>
+                <center>Oooooops, 服务器内部错误，请稍后重试</center>
+            <% }else if(typeof(result) == 'undefined' || result.length == 0){ %>
+                <center>对不起，没有找到相关记录</center>
+            <% }else{%>
+                <h4>session ID : <%= sid %></h4>
+                <% if(tn > 1) {%>
+                    <% if(request.query.p == 0 && request.query.p != tn - 1) {%>
+                    <a title="下一个" href="/tools/session?q=<%= request.query.q %>&t=<%= request.query.t %>&p=<%= parseInt(request.query.p) + 1 %>" target="_self">
+                        <span class="label label-primary">»</span>
+                    </a>
+                    <% }else if(request.query.p == tn - 1 && request.query.p != 0 ){ %>
+                    <a title="上一个" href="/tools/session?q=<%= request.query.q %>&t=<%= request.query.t %>&p=<%= parseInt(request.query.p) - 1 %>" target="_self">
+                        <span class="label label-primary">«</span>
+                    </a>
+                    <% }else{%>
+                    <a title="上一个" href="/tools/session?q=<%= request.query.q %>&t=<%= request.query.t %>&p=<%= parseInt(request.query.p) - 1 %>" target="_self">
+                        <span class="label label-primary">«</span>
+                    </a>
+                    <a title="下一个" href="/tools/session?q=<%= request.query.q %>&t=<%= request.query.t %>&p=<%= parseInt(request.query.p) + 1 %>" target="_self">
+                        <span class="label label-primary">»</span>
+                    </a>
+                    <% } %>
+                <% } %>
+                </p>
+                <table class="table table-condensed">
+                    <thead>
+                    <tr>
+                        <th>发生时间</th>
+                        <th>动作类型</th>
+                        <th>作用对象</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for(var i in result){ %>
+                        <tr>
+                            <td>
+                                <% if(i == 0 ){ %>
+                                <%= result[i].visit_time %>
+                                <% }else {%>
+                                <%=: new Date(result[i].visit_time), new Date(result[i - 1].visit_time) | prettyDTD %>后
+                                <% } %>
+                            </td>
+                            <td>
+                                <% if(result[i].type == 1) { %>
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                <% }else if(result[i].type == 2){ %>
+                                    <span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+                                <% } %>
+                            </td>
+                            <td>
+                                <% if(result[i].type == 1) { %>
+                                    搜索"
+                                    <% if(result[i].keywords == request.query.q ){ %>
+                                        <span class="red"><%= result[i].keywords %></span>
+                                    <% } else {%>
+                                        <%= result[i].keywords %>
+                                    <% } %>
+                                    @<%= result[i].table_name %>"的第<%= result[i].offset_counts %>页
+                                <% }else if(result[i].type == 2){ %>
+                                    点击"
+                                    <% if(result[i].keywords == request.query.q ){ %>
+                                    <span class="red"><%= result[i].keywords %></span>
+                                    <% } else {%>
+                                    <%= result[i].keywords %>
+                                    <% } %>
+                                    @<%= result[i].table_name %>"的第<%= result[i].offset_counts %>页的第<%= result[i].click_position %>个
+                                <% } %>
+                            </td>
+                        </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            <% }%>
+        </div>
+    <% }%>
+</div>

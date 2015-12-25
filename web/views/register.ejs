@@ -1,0 +1,40 @@
+<% layout('./base.ejs') -%>
+<header class="jumbotron subhead masthead">
+    <div class="container">
+        <h1>重庆维普日志平台</h1>
+        <p class="lead">新用户注册</p>
+    </div>
+</header>
+<div class="container">
+    <div id="msgbox" class="row"></div>
+    <form class="form-group has-feedback has-success form-horizontal bv-form" id="fregister" enctype="multipart/form-data" method="post" action='/doregister'>
+        <div class="col-xs-4">
+            <div class="row line-space">
+                <input type="text" class="form-control input-large" name="username" placeholder="邮箱">
+            </div>
+            <div class="row line-space">
+                <input type="text" class="form-control input-large" name="nickname" placeholder="实名">
+            </div>
+            <div class="row line-space">
+                <input type="password" class="form-control input-large" name="password" placeholder="密码">
+            </div>
+            <div class="row line-space">
+                <input type="password" class="form-control input-large" name="password2" placeholder="重复密码">
+            </div>
+            <div class="row"><button type="submit" class="btn btn-success">创建账号</button></div>
+        </div>
+        <div class="col-xs-1"></div>
+        <div class="col-xs-5">
+            <div class="fileinput fileinput-new" data-provides="fileinput">
+                <div class="fileinput-new thumbnail">
+                    <img src="/images/default.avatar.jpg" alt="...">
+                </div>
+                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                <div>
+                    <span class="btn btn-default btn-file"><span class="fileinput-new">上传头像</span><span class="fileinput-exists">更换头像</span><input type="file" name="..."></span>
+                    <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">重置</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

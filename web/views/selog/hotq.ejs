@@ -1,0 +1,18 @@
+<table class="table table-condensed">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>检索词</th>
+        <th>检索频率</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(var i in data){ %>
+    <tr>
+        <td><%= offset + parseInt(i) + 1 %></td>
+        <td><a target="_blank" href="/tools/session?q=<%= data[i].word %>&t=<%= t %>&p=0"><%= data[i].word %></a></td>
+        <td><%= data[i].freq %></td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>

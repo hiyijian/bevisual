@@ -1,0 +1,28 @@
+<% layout('../base.ejs') -%>
+<% script('/javascripts/jquery.bootpag.js') -%>
+<% script('/javascripts/recommend.js') -%>
+
+<header class="jumbotron subhead masthead">
+    <div class="container">
+        <h1>日志平台</h1>
+        <p class="lead">个性化推荐-推荐详情</p>
+    </div>
+</header>
+<div class="container">
+<input id="uid" type="hidden" value="<%= uid %>"></input>
+<h2><%= uid %></h2>
+<div class="col-md-6">
+	<div id='history' class=callout>
+		<h3>用户历史</h3>
+		<div id='history_box'></div>
+		<div id='history_pager'></div>
+	</div>
+</div>
+<div class="col-md-6">
+	<div id='rlist' class=callout>
+		<h3>猜您喜欢</h3>
+		<div id='rlist_box'></div>
+		<div id='rlist_pager'></div>
+	</div>
+</div>
+</div>

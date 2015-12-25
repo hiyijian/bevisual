@@ -1,0 +1,45 @@
+<% layout('../base.ejs') -%>
+<% script('/javascripts/jquery.bootpag.js') -%>
+<% script('/javascripts/echarts-all.js') -%>
+<% script('/javascripts/infographic.js') -%>
+<% script('/javascripts/compare.js') -%>
+
+<header class="jumbotron subhead masthead">
+    <div class="container">
+        <h1>日志平台</h1>
+        <p class="lead">个性化推荐-主题对比</p>
+    </div>
+</header>
+
+<div class="container" style="width:1400px;">
+<input id="uid" type="hidden" value="<%= uid %>"></input>
+<input id="docid" type="hidden" value="<%= docid %>"></input>
+	<div class="container text-center">
+		<h2><%= uid %></h2>
+		<h2>VS.</h2>
+		<h2><a target="_blank", href="http://zlf.cqvip.com/article/detail.aspx?id=<%= docid %>"><%= doc_title %></a></h2>
+		<h2>=<%= s %></h2>
+	</div>
+	<div class="container" style="width:auto;">
+		<div class="callout col-md-4">
+			<h3 class="text-center">用户的主题分布</h3>
+			<div class="echart-canvas" id="user_pie" style="width:450px;height:420px;"></div>	
+		</div>
+		<div class="callout col-md-4">
+			<h3 class="text-center">用户&文档-主题分布对比</h3>
+			<div class="echart-canvas" id="rader" style="width:400px;height:420px;"></div>
+		</div>
+			
+		<div class="callout col-md-4">
+			<h3 class="text-center">文档的主题分布</h3>
+			<div class="echart-canvas" id="doc_pie" style="width:450px;height:420px;"></div>
+		</div>
+	</div>
+	<div class="contailer" style="width:auto;">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="echart-canvas" id="word_cloud" style="width:400px;height:420px;"></div>
+		</div>
+		<div class="col-md-4"></div>
+	</div>
+</div>

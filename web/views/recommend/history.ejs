@@ -1,0 +1,18 @@
+<table class="table table-condensed">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>文章</th>
+        <th>访问时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(var i in history){ %>
+    <tr>
+        <td><%= offset + parseInt(i) + 1 %></td>
+        <td><a target="blank" href="http://zlf.cqvip.com/article/detail.aspx?id=<%= history[i].id %>"><%= history[i].title %></a></td>
+        <td><%=: history[i].t * 1000 | prettyD %></td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>
