@@ -117,8 +117,8 @@ function plot_wordcloud(topic, target, data)
 	}
     	var canvas = echarts.init(document.getElementById(target), e_infographic);
 	d = [];
-	for(var i in data.main){
-		d.push({name: data.main[i].word, value: data.main[i].rate, itemStyle: createRandomItemStyle()})
+	for(var i in data){
+		d.push({name: data[i].word, value: data[i].rate, itemStyle: createRandomItemStyle()})
 	}
 	option = {
 		title: {
