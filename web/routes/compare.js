@@ -26,7 +26,7 @@ exports.index = function(req, res){
 };
 
 exports.user_topic = function(req, res){
-    var uid = "_*" + req.body.uid
+    var uid = req.body.uid
     models.UserTopic.find({where: {uid: uid}}).then(function(recs){
 	topics = JSON.parse(recs.topics);
 	res.json(topics)
@@ -34,7 +34,7 @@ exports.user_topic = function(req, res){
 };
 
 exports.doc_topic = function(req, res){
-    var doc_id = "_*" + req.body.docid;
+    var doc_id = req.body.docid;
     models.DocTopic.find({where: {doc_id: doc_id}}).then(function(recs){
         Topics = JSON.parse(recs.Topics);
 	res.json(Topics)
@@ -42,8 +42,8 @@ exports.doc_topic = function(req, res){
 };
 
 exports.doc_user_common = function(req,res){
-    var doc_id = "_*" + req.body.docid;
-    var uid = "_*" + req.body.uid;
+    var doc_id = req.body.docid;
+    var uid = req.body.uid;
     models.UserTopic.find({where: {uid: uid}}).then(function(user){
         user_topics = JSON.parse(user.topics);
 	user_otherp2 = user_topics.otherp2;
